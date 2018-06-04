@@ -145,7 +145,7 @@ void LazyViterbi::constructTM() {
       else if ((i-j) == 1 || (j-i) == 1)
 	TM[i].push_back(10);
       else
-	TM[i].push_back(5);
+	TM[i].push_back(3);
     } 
   }
   minTMScore = 0;
@@ -160,17 +160,15 @@ void LazyViterbi::traceback(string datafile){
 	int s = (--trellis.end())->second;
 	double err = 0.0;
 
-//	outfile.open(outName);
 	while(t >= 0){
 			outfile << trellis[make_pair(t,s)] << '\n';
-cout <<	trellis[make_pair(t,s)] << ' ';
+//cout <<	trellis[make_pair(t,s)] << ' ';
 			err += abs(trellis[make_pair(t,s)]-data[t]);
 			s = trellis[make_pair(--t,s)];
 	}
-//	outfile.close();
-	cout << err/data.size() << endl;
+//	cout << err/data.size() << endl;
 }
 
 int main() {
-  LazyViterbi("ExampleHMM.txt", 127, 255, 9, 30);
+  LazyViterbi("ExampleHMM.txt", 127, 255, 17, 30);
 }
